@@ -41,3 +41,7 @@ const deleteUser = () => {
   };
   return fetch('/DeleteUser', options).then(res => res.json());
 };
+
+const logoutUser = () => {
+  return fetch('/Logout').then(res => res.json());
+}
