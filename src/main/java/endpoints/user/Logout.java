@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-
 /**
  * Servlet implementation class Logout
  */
@@ -30,18 +28,19 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		JSONObject resObj = new JSONObject();
+		String resObj = "{";
 		PrintWriter out = response.getWriter();
 		
 		if (session == null) {
 			response.setStatus(401);
-			resObj.put("error", "Debe estar logeado para realizar esta accion.");
-			out.write(resObj.toString());
+
+			resObj += "\"error\":\"Debe estar logeado para realizar esta accion.\" }";
+			out.write(resObj);
 		} else {
 			session.invalidate();
 			response.setStatus(200);
-			resObj.put("msg", "Ha cerrado sesion correctamente.");
-			out.write(resObj.toJSONString());
+			resObj += "\"msg\":\"Ha cerrado sesion correctamente.\" }";
+			out.write(resObj);
 		}
 		
 	}
