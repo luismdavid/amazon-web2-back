@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div>
+      <label for="firstName">Nombre</label>
+      <input type="text" id="firstName" />
+    </div>
+    <div>
+      <label for="lastName">Apellido</label>
+      <input type="text" id="lastName" />
+    </div>
+    <div>
+      <label for="password">Contrasena</label>
+      <input type="text" id="password" type="password" />
+    </div>
+    <div>
+      <label for="username">Usuario</label>
+      <input type="text" id="username" />
+    </div>
+    <div>
+      <label for="identification">Cedula</label>
+      <input type="text" id="identification" />
+    </div>
+    <div>
+      <label for="phone">Telefono</label>
+      <input type="text" id="phone" type="tel" />
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="text" id="email" type="email" />
+    </div>
+    <button onclick="submitForm()">REGISTRARSE</button>
+    <h1 id="responseContainer"></h1>
+    <script>
+      submitForm = () => {
+        const user = new User();
+        user.firstName = document.querySelector('#firstName').value;
+        user.email = document.querySelector('#email').value;
+        user.lastName = document.querySelector('#lastName').value;
+        user.password = document.querySelector('#password').value;
+        user.username = document.querySelector('#username').value;
+        user.identification = document.querySelector('#identification').value;
+        user.phone = document.querySelector('#phone').value;
+
+        registerUser(user).then(res => {
+          if (res.msg) {
+            document.querySelector('#responseContainer').innerHTML = res.msg;
+          } else {
+            document.querySelector('#responseContainer').innerHTML = res.error;
+          }
+        });
+      };
+    </script>
+    <script src="main.js"></script>
+  </body>
+</html>

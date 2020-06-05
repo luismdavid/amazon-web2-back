@@ -37,14 +37,14 @@ public class Delete extends HttpServlet {
 		PropertiesReader pr = PropertiesReader.getInstance();
 		PrintWriter out = response.getWriter();
 		String resObj = "{";
-		if (request.getSession(false) == null || !request.getSession(false).getAttribute("userId").equals((String) request.getParameter(("id")))) {
+		if (request.getSession(false) == null) {
 			response.setStatus(401);
 			out.write("Se debe logear en la cuenta para realizar esta accion.");
 			return;
 		}
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement stm = conn.prepareStatement(pr.getValue("DELETE_USER"))) {
 			
-			stm.setString(1, (String) request.getParameter("id"));
+			stm.setString(1, (String) request.getSession(false).getAttribute("userId"));
 			stm.execute();
 			request.getSession(false).invalidate();
 			response.setStatus(200);

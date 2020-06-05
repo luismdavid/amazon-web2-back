@@ -63,6 +63,7 @@ public class Login extends HttpServlet {
 					user += String.format(template, "email", rs.getString("email"));
 					user += String.format(template, "identification", rs.getString("identification"));
 					user += String.format(template, "id", rs.getString("id"));
+					user += "\"x\": null";
 				}
 				user += "}";
 			}
